@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +30,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late VideoPlayerController controller;
+
+  @override
+  void initState() {
+    loadVideoPlayer();
+    super.initState();
+  }
+
+  loadVideoPlayer() {
+    controller = VideoPlayerController.network(
+        'https://www.fluttercampus.com/video.mp4');
+    controller.addListener(() {
+      setState(() {});
+    });
+    controller.initialize().then((value) {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
